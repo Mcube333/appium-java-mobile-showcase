@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!-- Real devices in the cloud: parallel sessions (match your LambdaTest concurrency) -->
+<suite name="Mobile - LambdaTest" parallel="methods" thread-count="2">
+    <listeners>
+        <listener class-name="com.mudassir.mobile.tests.listeners.RetryTransformer"/>
+        <listener class-name="com.mudassir.mobile.tests.listeners.FailureListener"/>
+    </listeners>
+    <test name="All">
+        <packages><package name="com.mudassir.mobile.tests"/></packages>
+    </test>
+</suite>

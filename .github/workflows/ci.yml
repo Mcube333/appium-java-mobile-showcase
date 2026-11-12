@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      lt_app:
+        description: "LambdaTest app id (lt://...) to run the suite on real devices"
+        required: false
+
+jobs:
+  checks:
+    name: Compile + PII check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: PII leak check
+        run: bash scripts/pii-check.sh
+      - name: Compile main + tests
+        run: mvn -B -q test-compile
+
+  lambdatest:
+    name: Real devices (LambdaTest)
+    needs: checks
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.lt_app != ''
+    runs-on: ubuntu-latest
+    env:
+      LT_USERNAME: ${{ secrets.LT_USERNAME }}
+      LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: Run suite on LambdaTest
+        run: mvn -B test -Dsuite=lambdatest -Dlt.app=${{ github.event.inputs.lt_app }}
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
