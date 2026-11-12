@@ -1,5 +1,7 @@
 # Appium + Java Mobile Automation Showcase
 
+[![CI](https://github.com/Mcube333/appium-java-mobile-showcase/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Mcube333/appium-java-mobile-showcase/actions/workflows/ci.yml) ![Java](https://img.shields.io/badge/Java-17-orange) ![Appium](https://img.shields.io/badge/Appium-2-8A4182) ![Android](https://img.shields.io/badge/Android-UiAutomator2-3DDC84) ![TestNG](https://img.shields.io/badge/TestNG-7.x-red) ![LambdaTest](https://img.shields.io/badge/LambdaTest-cloud_grid-0A0A0A)
+
 Android automation for Sauce Labs **My Demo App** (React Native), built with
 **Java 17, Appium 2 (UiAutomator2), TestNG, AssertJ, Allure and GitHub Actions**.
 The same suite runs on a **local emulator** or **LambdaTest real devices** with one flag.
