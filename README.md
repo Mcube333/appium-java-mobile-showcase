@@ -9,6 +9,8 @@ The same suite runs on a **local emulator** or **LambdaTest real devices** with 
 This mirrors work I did migrating a production mobile suite from Python/Appium on LambdaTest to Java.
 The original is proprietary, so this is a clean-room rebuild on a public demo app.
 
+Part of my [QA & SDET portfolio](https://github.com/Mcube333/portfolio), alongside the [Playwright](https://github.com/Mcube333/playwright-java-showcase), [k6](https://github.com/Mcube333/k6-performance-showcase) and [analytics validator](https://github.com/Mcube333/analytics-event-validator) projects.
+
 ## What it covers
 
 | Area | Tests |
@@ -78,11 +80,22 @@ mvn test -Dsuite=lambdatest -Dlt.app=lt://APP_ID
 
 In CI, add `LT_USERNAME` and `LT_ACCESS_KEY` as repository secrets and run the workflow manually with the app id.
 
+## CI
+
+`.github/workflows/ci.yml`:
+1. On every push and pull request: runs the PII leak check (`scripts/pii-check.sh`) and compiles main and test code with JDK 17. Emulator and real-device runs are not part of this automatic job.
+2. Manual dispatch (`workflow_dispatch`): enter a LambdaTest app id (`lt://...`) to run the suite on real devices. This job needs the `LT_USERNAME` and `LT_ACCESS_KEY` repository secrets.
+3. Allure results from the LambdaTest run are uploaded as a build artifact.
+
 ## Locator note
 
 Locators are the app's accessibility ids (for example `Username input field`, `store item text`,
 `Add To Cart button`). If a new app release renames one, update the constant in the relevant screen class.
 Appium Inspector is the quickest way to confirm them.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
 
 ## Author
 
