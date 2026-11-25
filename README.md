@@ -86,7 +86,7 @@ In CI, add `LT_USERNAME` and `LT_ACCESS_KEY` as repository secrets and run the w
 `.github/workflows/ci.yml`:
 1. On every push and pull request: runs the PII leak check (`scripts/pii-check.sh`) and compiles main and test code with JDK 17. Emulator and real-device runs are not part of this automatic job.
 2. Manual dispatch (`workflow_dispatch`): enter a LambdaTest app id (`lt://...`) to run the suite on real devices. This job needs the `LT_USERNAME` and `LT_ACCESS_KEY` repository secrets.
-3. Allure results from the LambdaTest run are uploaded as a build artifact.
+3. The raw Allure results (`allure-results`) and a ready-to-open HTML report (`allure-report`) from the LambdaTest run are uploaded as build artifacts. Download `allure-report`, unzip it and serve it (for example `npx http-server allure-report`) because Allure needs a web server, not a `file://` open.
 
 ## Locator note
 
