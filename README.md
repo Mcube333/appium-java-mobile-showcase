@@ -60,7 +60,8 @@ npm install -g appium
 appium driver install uiautomator2
 appium                                    # start the server on :4723
 
-# Download the Android APK from https://github.com/saucelabs/my-demo-app-rn/releases
+# Download Android-MyDemoAppRN.1.3.0.build-244.apk (release v1.3.0) from
+# https://github.com/saucelabs/my-demo-app-rn/releases/tag/v1.3.0
 # and save it as apps/my-demo-app.apk
 
 mvn test                                  # full suite on emulator-5554
